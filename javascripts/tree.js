@@ -6,32 +6,41 @@ function clearTime() {
 	clearInterval(setTime);
 };
 
-var Tree = function() {
+function Tree() {
 	this.branches = 0;
 };
+Tree.prototype = new Plant();
 
 Tree.prototype.grow = function (amount) {
-	this.branches += 1;
+	this.increaseHeight(amount);
 };
 
-Tree.prototype.trim = function() {
+Tree.prototype.trim = function(amount) {
+	this.decreaseHeight(amount);
 	this.branches -= 1;
 };
 
-var Plant = function() {
+function Plant() {
 	this.height = 0;
 };
-Plant.prototype = new Tree();
 
 Plant.prototype.increaseHeight = function (growth) {
-
+	this.height += growth;
 };
 
-Plant.prototype.decreaseHeight = function() {
-
+Plant.prototype.decreaseHeight = function(growth) {  //<---decreaseHeight is the name of the function
+	this.height -= growth
 };
 
-var Peartree = new Tree();
+let Peartree = new Tree();
 
 
-var Oaktree = new Tree();
+let Oaktree = new Tree();
+
+
+console.log("pear", Peartree);
+
+
+
+
+
