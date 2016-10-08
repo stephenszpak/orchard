@@ -1,10 +1,10 @@
-$(function() {
-	setInterval(Tree, 3000);
-});
+"use strict";
 
-function clearTime() {
-	clearInterval(setTime);
-};
+let interval = null;
+let counter = 0;
+
+const outputDiv = $("#output");
+// console.log("main", outputDiv);
 
 function Tree() {
 	this.branches = 0;
@@ -24,23 +24,47 @@ function Plant() {
 	this.height = 0;
 };
 
-Plant.prototype.increaseHeight = function (growth) {
-	this.height += growth;
+
+Plant.prototype.increaseHeight = function(growth) {
+	for (let i = 0; i < growth; i++) {
+		this.height += 1;
+		if (this.height % 10 === 0) {
+			this.branches++
+		};
+	};
 };
 
 Plant.prototype.decreaseHeight = function(growth) {  //<---decreaseHeight is the name of the function
 	this.height -= growth
 };
 
-let Peartree = new Tree();
+let PearTree = new Tree();
+let OakTree = new Tree();
 
 
-let Oaktree = new Tree();
+// console.log("pear", PearTree);
 
 
-console.log("pear", Peartree);
+interval = setInterval(function(){
+	PearTree.grow(2);
+	OakTree.grow(3);
+
+	let output = `<p> counter ${counter}</p>`;
+		output += `<p>Pear tree is now ${PearTree.height} ft tall and has ${PearTree.branches} branches</p>`;
+		output += `<p>Oak tree is now ${OakTree.height} ft tall and has ${OakTree.branches} branches</p>`;
+	outputDiv.append(output);
 
 
-
+	console.log("counter", counter);
+	if (counter % 10 === 0) {
+		PearTree.trim(1);
+		OakTree.trim(2);
+	};
+	if (counter > 30) {
+		clearInterval(interval);
+		console.log("finished");
+	};
+	counter++;
+	}, 1000);
 
 
