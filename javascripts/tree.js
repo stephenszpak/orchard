@@ -1,10 +1,16 @@
+"use strict";
+
+const outputDiv = $("#output");
+console.log("main", outputDiv);
+
+
 $(function() {
 	setInterval(Tree, 3000);
 });
 
-function clearTime() {
-	clearInterval(setTime);
-};
+// function clearTime() {
+// 	clearInterval(setTime);
+// };
 
 var Tree = function() {
 	this.branches = 0;
